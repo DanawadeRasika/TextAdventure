@@ -1,7 +1,7 @@
 import random
 import items, world
 
-
+weapon_selected= None
 class Player():
     def __init__(self):
         self.inventory = [items.Gold(15), items.Battleaxe(), items.Crossbow()]  # Inventory on startup
@@ -64,6 +64,7 @@ class Player():
 
 
 
+
     #def attack(self, enemy):
 
         """max_dmg = 0
@@ -81,12 +82,30 @@ class Player():
             print("{} HP is {}.".format(enemy.name, enemy.hp))
 
     def attack(self, enemy):
-        print("You use {} against {}!".format(self.currentweapon, enemy.name))
-        enemy.hp -= self.currentweapon.damage
-        if not enemy.is_alive():
-            print("You killed {}!".format(enemy.name))
+        """weapon_list = []
+        for item in self.inventory:
+            if isinstance(item, items.Weapon):
+                weapon_list.append(item)
+        itemChoice=1
+        print(weapon_list[itemChoice].name, "equipped.\n")
+        self.currentweapon = weapon_list[itemChoice]"""
+        global weapon_selected
+        if weapon_selected == None:
+            for item in self.inventory:
+                weapon_selected = item
+            print("You use {} against {}!".format(weapon_selected, enemy.name))
+            enemy.hp -= weapon_selected.damage
+            if not enemy.is_alive():
+                print("You killed {}!".format(enemy.name))
+            else:
+                print("{} HP is {}.".format(enemy.name, enemy.hp))
         else:
-            print("{} HP is {}.".format(enemy.name, enemy.hp))
+            print("You use {} against {}!".format(self.currentweapon, enemy.name))
+            enemy.hp -= self.currentweapon.damage
+            if not enemy.is_alive():
+                print("You killed {}!".format(enemy.name))
+            else:
+                print("{} HP is {}.".format(enemy.name, enemy.hp))
 
     def do_action(self, action, **kwargs):
         action_method = getattr(self, action.method.__name__)

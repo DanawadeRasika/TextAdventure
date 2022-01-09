@@ -1,6 +1,6 @@
-||StartingRoom2||||
-||MonsterAlley|RustMonster|||
+||StartingRoom||||
+||Goblin|RustMonster|||
 ||Forest||Coins||
 ||FindDaggerRoom|MindFlayer||||
 ||RustMonster|Forest|Dungeon|Dragon|Gems
-||Goblin|Gems|Dungeon|Coins|EndLevel|
+||Coins|Gems|Dungeon|Coins|EndLevel|

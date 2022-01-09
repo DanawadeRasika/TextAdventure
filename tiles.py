@@ -1,5 +1,7 @@
 import items, enemies, actions, world
 
+#level_passed = False
+
 
 class MapTile:
     def __init__(self, x, y):
@@ -51,13 +53,38 @@ class StartingRoom(MapTile):
 ██║░░██║██╔══██╗██╔══██║██║░░╚██╗██║░░██║██║╚████║░╚═══██╗
 ██████╔╝██║░░██║██║░░██║╚██████╔╝╚█████╔╝██║░╚███║██████╔╝
 ╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░╚═════╝░░╚════╝░╚═╝░░╚══╝╚═════╝░                                                                  
-"""
 
-        """Dungeon Master- " You find yourslef in an overgrown old forest. Before you is a Giant Oak tree spreading its claws
+
+        Dungeon Master- " You find yourslef in an overgrown old forest. Before you is a Giant Oak tree spreading its claws
         It warns you "Beware !! This forest has been a home to blood of many warriors
         What Do You Do Next?"
         
         """
+
+    def modify_player(self, player):
+        # Room has no action on player
+        pass
+
+
+class StartingRoom2(MapTile):
+    # override the intro_text method in the superclass
+    def intro_text(self):
+        return """
+    Rumors of demonic activity in the Underdark have reached the surface through whispers and hushed tales of violence. 
+    King Bruenor sends his friend Drizzt Do’Urden to find out what’s happening beneath the surface but it becomes all 
+    too clear when the demon lord Demogorgon ravages the drow city of Menzobarranzan. The Horned Lord Baphomet toys with 
+    victims in the vast maze of the Underdark and the Demon Queen of Fungi Zuggtmoy plans to join 
+    with a massive city-sized fungus in an insane marriage ceremony. 
+    Yeenoghu, the Demon Lord of Gnolls, wanders the dark, spawning new gnoll servants from his kills to continue 
+    the destruction, while the demon lords of lust and deception prey on the weak-willed peoples of the Underdark.
+
+    In the madness of the dark, who will be the light to shine against the demons? 
+    The races of the deep vie against the demons but there are few allies in the Underdark among drow, 
+    mindflayers, duergar and deep gnomes. 
+    Drizzt Do’Urden and the magical panther Guenhwyvar are dedicated to tracking Demogorgon and putting a stop to 
+    his reign of madness but it’s even more crucial to find out why the demon lords came out of the Abyss at all. 
+    Who is responsible for the chaos that’s been unleashed? 
+    Solve the mystery before the demons reach the surface. Dare to descend!"""
 
     def modify_player(self, player):
         # Room has no action on player
@@ -103,20 +130,24 @@ class MonsterAlley(MapTile):
         # Room has no action on player
         pass
 
+
 class Dungeon(MapTile):
     def intro_text(self):
         return """
         Ahead lies a Dungeon home to dreadful DRAGONS!.
         """
+
     def modify_player(self, player):
         # Room has no action on player
         pass
+
 
 class Forest(MapTile):
     def intro_text(self):
         return """
         Walk through the creepy FOREST to face next challenge!.
         """
+
     def modify_player(self, player):
         # Room has no action on player
         pass
@@ -150,6 +181,7 @@ class MindFlayer(EnemyRoom):
             return """
              The corpse of a dead Mindfalyer is on the ground.
              """
+
 
 class Dragon(EnemyRoom):
     def __init__(self, x, y):
@@ -208,6 +240,7 @@ class Dragon(EnemyRoom):
              The corpse of a dead Dragon is on the ground.
              """
 
+
 class Goblin(EnemyRoom):
     def __init__(self, x, y):
         super().__init__(x, y, enemies.Goblin())
@@ -234,6 +267,7 @@ class FindDaggerRoom(CollectTreasure):
         It's a dagger! You pick it up.
         """
 
+
 class Gems(CollectTreasure):
     def __init__(self, x, y):
         super().__init__(x, y, items.Dagger())
@@ -244,6 +278,8 @@ class Gems(CollectTreasure):
         It has glass like object overflowing. You take a closer look
         Its a Chest of GEMS!.
         """
+
+
 class Coins(CollectTreasure):
     def __init__(self, x, y):
         super().__init__(x, y, items.Dagger())
@@ -252,6 +288,7 @@ class Coins(CollectTreasure):
         return """
         A Pile of Gold coins is visible right in front of you.
         """
+
 
 class EndLevel(MapTile):
     def intro_text(self):
@@ -262,4 +299,6 @@ class EndLevel(MapTile):
         """
 
     def modify_player(self, player):
+        #level_passed = True
         player.victory = True
+

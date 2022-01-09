@@ -1,8 +1,13 @@
 import world
 from player import Player
 
+level_pass = False
+
+game_level = 1
+
 def play():
-    world.load_tiles()
+    global game_level
+    world.load_tiles(game_level)
     player = Player()
     #These lines load the starting room and display the text
     room = world.tile_exists(player.location_x, player.location_y)
@@ -22,6 +27,22 @@ def play():
                     player.do_action(action, **action.kwargs)
                     break
 
+    global level_pass
+    level_pass = player.victory
+    if level_pass == True:
+        game_level += 1
+
+
+
+
 
 if __name__ == "__main__":
     play()
+    if (level_pass == True) and game_level == 2:
+
+        level_pass = False
+        play()
+    if (level_pass == True) and game_level == 3:
+        play()
+
+
